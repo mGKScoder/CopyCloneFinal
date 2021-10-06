@@ -1,0 +1,35 @@
+﻿<Window x:Class="CopyCloneFinal.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="clr-namespace:CopyCloneFinal.View"
+        xmlns:viewModel="clr-namespace:CopyCloneFinal.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="500">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <ItemsControl ItemsSource="{Binding Items}" Grid.IsSharedSizeScope="True">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#CCCCCC" BorderThickness="1" Margin="4">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="COL1"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0"
+                                     Text="{Binding Path=Data.Text, UpdateSourceTrigger=PropertyChanged}"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                                <Button Content="Copy" Command="{Binding CopyItemCommand}"/>
+                                <Button Content="Clone" Command="{Binding CloneItemCommand}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</Window>
